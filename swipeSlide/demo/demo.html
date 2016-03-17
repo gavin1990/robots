@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>滚动</title>
+	<meta name="author" content="robots_xx@163.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">           
+    <meta http-equiv="Cache-Control" content="no-cache">           
+    <meta http-equiv="Pragma" content="no-cache"> 
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div class="t_slide">
+	<ul id="evt_li_1" data-li="1" class="img_box" style="height:260px">
+		<li class="current"><a href=""><img src="images/ban_01.jpg"></a></li>
+		<li><a href=""><img src="images/ban_02.jpg"></a></li>
+		<li><a href=""><img src="images/ban_03.jpg"></a></li>
+		<li><a href=""><img src="images/ban_04.jpg"></a></li>
+	</ul>
+	<ol>
+		<li class="cur"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ol>
+</div>
+<!-- slider end -->
+<!-- 动态 start -->
+<div class="y_dyn">
+	<b>最新动态：</b>
+	<div class="dyn_li">
+		<ul>
+			<li><a href="" target="_blank">P2P投资理财与银行理财的6大差异行理财的</a></li>
+			<li><a href="" target="_blank">北京投资客抄底核心商铺</a></li>
+		</ul>
+	</div>
+</div>
+<!-- 动态 end -->
+	<script src="http://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+	<script src="../imgSlide.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var evtLiH = $("#evt_li_1").find("li").height;
+			$("#evt_li_1").css("height",evtLiH);
+			$("#evt_li_1").imgSlide({"effect":"leftLoop","time":4000});
+			$(".dyn_li").textSlide({"time":3000});
+		})
+	</script>
+</body>
+</html>
