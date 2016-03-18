@@ -1,52 +1,4 @@
 /**
- * 文字上下轮播
- * @param  {[type]} $ [description]
- * @return {[type]}   [description]
- */
-;(function($){
-	$.fn.textSlide = function(opt){
-		var $ele = this;
-		var defaults = {
-			time:4000,
-			effect:"up"
-		}
-
-		var options = $.extend({},defaults,opt);
-		var first = $ele.find("li").eq(0).clone();
-		$ele.find("ul").append(first);
-		var itemLen = Number($ele.find("li").length),
-		    itemHeight = $ele.find("li").height();
-		var curIndex = 0;
-		var timer = null;
-		timer = setInterval(function() {
-		    curIndex++;
-		    if (curIndex < itemLen) {
-		        if (curIndex == (itemLen - 1)) {
-		            $ele.find("ul").animate({
-		                "top": -curIndex * itemHeight + "px"
-		            }, 400);
-		            setTimeout(function() {
-		                $ele.find("ul").css({
-		                    "top": "0"
-		                });
-		            }, 500);
-		        } else {
-		            $ele.find("ul").animate({
-		                "top": -curIndex * itemHeight + "px"
-		            }, 400);
-		        }
-		    } else {
-		        curIndex = 1;
-		        $ele.find("ul").animate({
-		            "top": -curIndex * itemHeight + "px"
-		        }, 400);
-		    }
-		}, options.time);
-	}
-})(Zepto)
-
-
-/**
  * imgSlide
  * 2016/03/17
  * robots
@@ -136,17 +88,15 @@
 				item.parent().siblings("ol").find("li").eq(index-1).addClass("cur").siblings().removeClass("cur");
 				if(this.options.effect == "fade"){
 					item.animate({"opacity": 0,"z-index":900},500).parent().find("li").eq(index-1).animate({"opacity": 1,"z-index":910},this.options.speed,"linear",_self.setSlideing());
-				}else if(this.options.effect == "leftLoop"){
-					if(isTran){		//是否滚动到最后
-						item.parent().animate(
-							{"-webkit-transform":"translateX(-"+(index - 1) * clientW+"px)","transform":"translateX(-"+(index - 1) * clientW+"px)"}
-							,400,"ease-in-out",_self.setSlideing());
-					}
+				}else if(this.options.effect == "leftLoop" && isTran){ //左右轮播是否滚动到最后
+					item.parent().animate(
+						{"-webkit-transform":"translateX(-"+(index - 1) * clientW+"px)","transform":"translateX(-"+(index - 1) * clientW+"px)"}
+						,400,"ease-in-out",_self.setSlideing());
 				}
 
-				if(this.options.autoplay){ 		//重新加载定时器
+				if(this.options.autoplay)		//重新加载定时器
 					_self.autoPlay(this.$element);
-				}
+				
 			}
 		},
 		/**
@@ -179,15 +129,12 @@
 				item.parent().siblings("ol").find("li").eq(index-1).addClass("cur").siblings().removeClass("cur");
 				if(this.options.effect == "fade"){
 					item.animate({"opacity": 0,"z-index":900},500).parent().find("li").eq(index-1).animate({"opacity": 1,"z-index":910},this.options.speed,"linear",_self.setSlideing());
-				}else if(this.options.effect == "leftLoop"){
-					if(isTran){  //是否滚动到最前面一个
-						item.parent().animate({"-webkit-transform":"translateX(-"+(index - 1) * clientW+"px)","transform":"translateX(-"+(index - 1) * clientW+"px)"},400,"ease-in-out",_self.setSlideing());
-					}
+				}else if(this.options.effect == "leftLoop" && isTran){ //左右轮播是否滚动到最前面一个
+					item.parent().animate({"-webkit-transform":"translateX(-"+(index - 1) * clientW+"px)","transform":"translateX(-"+(index - 1) * clientW+"px)"},400,"ease-in-out",_self.setSlideing());
 				}
 
-				if(this.options.autoplay){ 		//重新加载定时器
+				if(this.options.autoplay) 		//重新加载定时器
 					_self.autoPlay(this.$element);
-				}
 			}
 		},
 		/**
