@@ -7,21 +7,23 @@
 	$.fn.textSlide = function(opt){
 		var $ele = this;
 		var defaults = {
+			scrollNum:1,
 			time:4000,
 			effect:"up"
 		}
 
 		var options = $.extend({},defaults,opt);
-		var first = $ele.find("li").eq(0).clone();
-		$ele.find("ul").append(first);
 		var itemLen = Number($ele.find("li").length),
 		    itemHeight = $ele.find("li").height();
+		for(var i = 0; i < options.scrollNum; i++){
+	            $ele.find("ul").append($ele.find("li").eq(i).clone());
+	        };
 		var curIndex = 0;
 		var timer = null;
 		timer = setInterval(function() {
 		    curIndex++;
-		    if (curIndex < itemLen) {
-		        if (curIndex == (itemLen - 1)) {
+		    if (curIndex < (itemLen + 1)) {
+		        if (curIndex == itemLen) {
 		            $ele.find("ul").animate({
 		                "top": -curIndex * itemHeight + "px"
 		            }, 400);
